@@ -6,7 +6,7 @@ function component() {
    var element = j('<div></div>');
 
    // _.join 中的 " _ " 实际上是lodash暴露的全局变量
-   element.html(_.join(['Hello', 'webpack'], ' '));
+   element.html(_.join(['HELLO', 'WEBPACK'], ' '));
 
    return element.get(0);
 }
