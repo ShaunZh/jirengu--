@@ -1,0 +1,28 @@
+/*
+* @Author: Marte
+* @Date:   2017-07-31 11:19:33
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-07-31 11:30:18
+*/
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*::after{
+  box-sizing: border-box;
+}
+
+*::befor{
+  box-sizing: border-box;
+}
+
+ul, ol, dl{
+  list-style: none;
+}
+
+a{
+  color: inherit;
+}
