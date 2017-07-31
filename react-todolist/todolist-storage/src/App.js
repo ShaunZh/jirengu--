@@ -7,15 +7,25 @@ import './TodoInput.css'
 import React, { Component } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
-import * as localStore from './localStore'
 
+import AV from './leanCloud'
+
+var TodoFolder = AV.Object.extend('TodoFolder');
+var todoFolder = new TodoFolder();
+todoFolder.set('name', '工作');
+todoFolder.set('priority', 1);
+todoFolder.save().then((todo) => {
+  console.log('objectId is ' + todo.id);
+}, (error) => {
+  console.error(error);
+});
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newTodo: '',
-      todoList: localStore.load('todoList') || []
+      todoList: []
     };
   }
 
@@ -48,7 +58,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    localStore.save('todoList', this.state.todoList);
+
   }
 
   toggle(e, todo) {
