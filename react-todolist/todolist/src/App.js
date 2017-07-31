@@ -24,13 +24,15 @@ class App extends Component {
         </li>
       );
     });
-    console.log(todos);
 
+    // onChange 和 onSubmit 是传递括号里面的参数
     return (
       <div className="App">
         <h1>我的待办</h1>
         <div className="inputWrapper">
-          <TodoInput content={this.state.newTodo} onSubmit={this.addTodo.bind(this)}/>
+          <TodoInput content={this.state.newTodo}
+          onChange={this.changeTitle.bind(this)}
+          onSubmit={this.addTodo.bind(this)}/>
         </div>
         <ol>
           {todos}
@@ -38,14 +40,23 @@ class App extends Component {
       </div>
     );
   }
+  changeTitle(event) {
+    console.log('hhh');
+    this.setState({
+      newTodo: event.target.value,
+      todoList: this.state.todoList
+    });
+  }
 
   addTodo(event) {
+    console.log('aaa');
     this.state.todoList.push({
       id: idMaker(),
       title: event.target.value,
       status: null,
       deleted: false
     });
+
     this.setState({
       newTodo: '',
       todoList: this.state.todoList
