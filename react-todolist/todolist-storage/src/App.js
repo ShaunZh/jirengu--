@@ -10,6 +10,10 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import * as localStore from './localStore'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e2102e1986042bdc23b292f5a86e52989a06f256
 var APP_ID = 'z4xch4Exr8u8GEfhGO2lndxC-gzGzoHsz';
 var APP_KEY = 'BT2W1RyXotxlyoeOs6nwcBFv';
 
@@ -101,3 +105,5 @@ function idMaker() {
   id += 1;
   return id;
 }
+
+
