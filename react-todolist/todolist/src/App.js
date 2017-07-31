@@ -1,6 +1,7 @@
 import 'normalize.css';
 import './reset.css';
 import './App.css';
+import './TodoItem.css'
 
 import React, { Component } from 'react';
 import TodoInput from './TodoInput';
@@ -37,7 +38,7 @@ class App extends Component {
           onChange={this.changeTitle.bind(this)}
           onSubmit={this.addTodo.bind(this)}/>
         </div>
-        <ol>
+        <ol className="todoList">
           {todos}
         </ol>
       </div>
