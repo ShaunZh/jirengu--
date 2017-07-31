@@ -2,6 +2,7 @@ import 'normalize.css';
 import './reset.css';
 import './App.css';
 import './TodoItem.css'
+import './TodoInput.css'
 
 import React, { Component } from 'react';
 import TodoInput from './TodoInput';
