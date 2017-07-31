@@ -5,9 +5,19 @@ import './TodoItem.css'
 import './TodoInput.css'
 
 import React, { Component } from 'react';
+import AV from 'leancloud-storage';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import * as localStore from './localStore'
+
+
+var APP_ID = 'z4xch4Exr8u8GEfhGO2lndxC-gzGzoHsz';
+var APP_KEY = 'BT2W1RyXotxlyoeOs6nwcBFv';
+
+AV.init({
+  appId: APP_ID,
+  appKey: APP_KEY
+});
 
 class App extends Component {
   constructor(props) {
@@ -92,3 +102,5 @@ function idMaker() {
   id += 1;
   return id;
 }
+
+
