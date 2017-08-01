@@ -2,11 +2,12 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 11:29:13
+* @Last Modified time: 2017-08-01 14:23:58
 */
 
 import React, { Component } from 'react';
 import './UserDialog.css';
+import {signUp} from './leanCloud';
 
 export default class UserDialog extends Component {
   constructor(props) {
@@ -26,7 +27,17 @@ export default class UserDialog extends Component {
         });
     }
 
-    signUp(e) {}
+    signUp(e) {
+      e.preventDefault();
+      let {username, password} = this.state.formData;
+      let success = (user) => {
+        console.log(user);
+      }
+      let error = (error) => {
+        console.log(error);
+      }
+      signUp(username, password, success, error);
+    }
     signIn(e) {}
 
     changeFormData(key, e) {

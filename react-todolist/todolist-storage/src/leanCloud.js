@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-07-31 17:33:51
+* @Last Modified time: 2017-08-01 14:23:57
 */
 import AV from 'leancloud-storage';
 
@@ -16,3 +16,30 @@ AV.init({
 
 
 export default AV
+
+export function signUp(username, password, successFn, errorFn) {
+  // 新建 AVUser 对象实例
+  var user = new AV.User()
+  // 设置用户名
+  user.setUsername(username);
+  // 设置密码
+  user.setPassword(password);
+
+  user.signUp().then(function (loginedUser) {
+    console.log('打印出loginedUser: ');
+    console.log(loginedUser);
+    let user = getUserFromAVUser(loginedUser);
+    successFn.call(null, user);
+  }, function(error) {
+    errorFn.call(null, error);
+  });
+
+  return undefined;
+}
+
+function getUserFromAVUser(AVUser) {
+  return {
+    id: AVUser.id,
+    ...AVUser.attributes
+  }
+}
