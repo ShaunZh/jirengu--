@@ -2,15 +2,15 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 18:05:25
+* @Last Modified time: 2017-08-01 18:11:38
 */
 
 import React, { Component } from 'react';
 import './UserDialog.css';
-import {signUp, signIn} from './leanCloud';
+import { signUp, signIn } from './leanCloud';
 
 export default class UserDialog extends Component {
-  constructor(props) {
+    constructor(props) {
         super(props);
         this.state = {
             selected: 'signUp',
@@ -28,55 +28,55 @@ export default class UserDialog extends Component {
     }
 
     signUp(e) {
-      e.preventDefault();
-      let {username, password} = this.state.formData;
-      let success = (user) => {
-        this.props.onSignUp.call(null, user);
-      }
-      let error = (error) => {
-        switch(error.code) {
-          case 202: {
-            alert('用户名已被占用');
-          }
-          break;
-          default: {
-            alert(error);
-          }
-          break;
+        e.preventDefault();
+        let {username, password} = this.state.formData;
+        let success = (user) => {
+            this.props.onSignUp.call(null, user);
         }
-      }
-      signUp(username, password, success, error);
+        let error = (error) => {
+            switch (error.code) {
+            case 202: {
+                alert('用户名已被占用');
+            }
+            break;
+            default: {
+                alert(error);
+            }
+            break;
+            }
+        }
+        signUp(username, password, success, error);
     }
     signIn(e) {
-      e.preventDefault();
-      let {username, password} = this.state.formData;
-      let success = (user) => {
-        this.props.onSignIn.call(null, user);
-      }
-      let error = (error) => {
-        switch(error.code) {
-          case 210: {
-            alert('用户名与密码不匹配');
-          }
-          break;
-          default: {
-            alert(error);
-          }
-          break;
+        e.preventDefault();
+        let {username, password} = this.state.formData;
+        let success = (user) => {
+            this.props.onSignIn.call(null, user);
         }
-      }
-      signIn(username, password, success, error);
+        let error = (error) => {
+            switch (error.code) {
+            case 210: {
+                alert('用户名与密码不匹配');
+            }
+            break;
+            default: {
+                alert(error);
+            }
+            break;
+            }
+        }
+        signIn(username, password, success, error);
     }
 
     changeFormData(key, e) {
-      // this.state.formData.username = e.target.value;
-      // this.setState(this.state);
-      // 像上面这样写会看到一个警告 warning  Do not mutate state directly. Use setState()
-      // 当我们需要修改state的值时，不要直接修改，通过setState进行修改，
-      // 那么如果通过setState进行修改呢？给它传递一个对象或函数
-      let stateCopy = JSON.parse(JSON.stringify(this.state));
-      stateCopy.formData[key] = e.target.value;
-      this.setState(stateCopy);
+        // this.state.formData.username = e.target.value;
+        // this.setState(this.state);
+        // 像上面这样写会看到一个警告 warning  Do not mutate state directly. Use setState()
+        // 当我们需要修改state的值时，不要直接修改，通过setState进行修改，
+        // 那么如果通过setState进行修改呢？给它传递一个对象或函数
+        let stateCopy = JSON.parse(JSON.stringify(this.state));
+        stateCopy.formData[key] = e.target.value;
+        this.setState(stateCopy);
     }
 
     render() {
@@ -108,25 +108,26 @@ export default class UserDialog extends Component {
           </div>
           <div className="row actions">
             <button type="subtmit">登录</button>
+            <a href="javascript:;">忘记密码了?</a>
           </div>
         </form>
         );
 
         return (
-          <div className="UserDialog-Wrapper">
+            <div className="UserDialog-Wrapper">
           <div className="UserDialog">
             <nav onChange = {this.switch.bind(this)}>
               <label>
                 <input type="radio" value="signUp"
-                  checked={this.state.selected === 'signUp'}
-                  onChange={this.switch.bind(this)}
-                /> 注册
+            checked={this.state.selected === 'signUp'}
+            onChange={this.switch.bind(this)}
+            /> 注册
               </label>
               <label>
                 <input type="radio" value="signIn"
-                  checked={this.state.selected === 'signIn'}
-                  onChange={this.switch.bind(this)}
-                /> 登录
+            checked={this.state.selected === 'signIn'}
+            onChange={this.switch.bind(this)}
+            /> 登录
               </label>
             </nav>
 

@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-08-01 00:02:09
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 18:05:21
+* @Last Modified time: 2017-08-01 18:10:59
 */
 .UserDialog-Wrapper{
   position: fixed;
@@ -34,4 +34,6 @@
 
 .UserDialog form>.row{ display: flex; padding: .3em 0;}
 .UserDialog form>.row>label:first-child{width: 4em;}
-.UserDialog form>.row.actions{ padding-left: 4em}
+.UserDialog form>.row.actions{ padding-left: 4em; display: flex; align-items: center;}
+.UserDialog form>.row.actions button{margin-right: .5em;}
+.UserDialog button{font: inherit; padding: .2em;}
