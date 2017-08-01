@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 18:18:00
+* @Last Modified time: 2017-08-01 20:52:13
 */
 import AV from 'leancloud-storage';
 
@@ -58,6 +58,14 @@ export function getCurrentUser() {
 export function signOut() {
   AV.User.logOut();
   return undefined;
+}
+
+export function sendPasswordResetEmail(email, successFn, errorFn) {
+  AV.User.requestPasswordReset(email).then(function (success) {
+    successFn.call();
+  }, function(error) {
+    console.dir(error);
+  })
 }
 
 function getUserFromAVUser(AVUser) {
