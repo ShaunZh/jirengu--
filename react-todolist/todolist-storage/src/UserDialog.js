@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 10:20:35
+* @Last Modified time: 2017-08-01 11:16:18
 */
 
 import React, { Component } from 'react';
@@ -12,50 +12,77 @@ export default class UserDialog extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 'signUp'
+            selected: 'signUp',
+            formData: {
+                username: '',
+                password: ''
+            }
         };
     }
+
     switch(e) {
         this.setState({
             selected: e.target.value
         });
     }
 
+    signUp(e) {}
+    signIn(e) {}
+
+    changeUsername(e) {
+        // this.state.formData.username = e.target.value;
+        // this.setState(this.state);
+        // 像上面这样写会看到一个警告 warning  Do not mutate state directly. Use setState()
+        // 当我们需要修改state的值时，不要直接修改，通过setState进行修改，
+        // 那么如果通过setState进行修改呢？给它传递一个对象或函数
+        let stateCopy = JSON.parse(JSON.stringify(this.state));
+        stateCopy.formData.username = e.target.value;
+        this.setState(stateCopy);
+    }
+
+    changePassword(e) {
+        // this.state.formData.password = e.target.value;
+        // this.setState(this.state);
+        let stateCopy = JSON.parse(JSON.stringify(this.state)); // 用 JSON 深拷贝
+        stateCopy.formData.password = e.target.value;
+        this.setState(stateCopy);
+    }
+
     render() {
-      let signUpForm = (
-        <form className="signUp"> { /*注册*/ }
+        let signUpForm = (
+        <form className="signUp" onSubmit={this.signUp.bind(this)}> { /*注册*/ }
           <div className="row">
             <label>用户名</label>
-            <input type="text" />
+            <input type="text" value={this.state.formData.username} onChange={this.changeUsername.bind(this)} />
           </div>
           <div className="row">
             <label>密码</label>
-            <input type="password" />
+            <input type="password" value={this.state.formData.password} onChange={this.changePassword.bind(this)} />
           </div>
           <div className="row actions">
             <button type="submit">注册</button>
           </div>
         </form>
-      );
+        );
 
-      let signInForm = (
-        <form className="signIn"> { /*登录*/ }
+        let signInForm = (
+        <form className="signIn" onSubmit={this.signIn.bind(this)}> { /*登录*/ }
           <div className="row">
             <label>用户名</label>
-            <input type="text" />
+            <input type="text" value={this.state.formData.username} onChange={this.changeUsername.bind(this)} />
           </div>
           <div className="row">
             <label>密码</label>
-            <input type="password" />
+            <input type="password" value={this.state.formData.password} onChange={this.changePassword.bind(this)} />
           </div>
           <div className="row actions">
             <button type="subtmit">登录</button>
           </div>
         </form>
-      );
+        );
 
-      return (
-        <div className="UserDialog-Wrapper">
+        return (
+            <div className="UserDialog-Wrapper">
           <div className="UserDialog">
             <nav onChange = {this.switch.bind(this)}>
               <label><input type="radio" value="signUp" checked={this.state.selected === 'signUp'} /> 注册</label>
@@ -69,6 +96,6 @@ export default class UserDialog extends Component {
 
           </div>
         </div>
-      );
+        );
     }
 }
