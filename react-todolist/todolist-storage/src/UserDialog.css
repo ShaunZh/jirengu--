@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-08-01 00:02:09
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 08:43:53
+* @Last Modified time: 2017-08-01 18:05:21
 */
 .UserDialog-Wrapper{
   position: fixed;
@@ -14,6 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background: hsla(0, 0%, 0%, .40);
 }
 
 .UserDialog{
