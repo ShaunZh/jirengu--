@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 20:52:13
+* @Last Modified time: 2017-08-01 21:01:28
 */
 import AV from 'leancloud-storage';
 
@@ -64,13 +64,14 @@ export function sendPasswordResetEmail(email, successFn, errorFn) {
   AV.User.requestPasswordReset(email).then(function (success) {
     successFn.call();
   }, function(error) {
-    console.dir(error);
+    errorFn.call(null, error);
   })
 }
 
 function getUserFromAVUser(AVUser) {
   return {
     id: AVUser.id,
+    // ES6语法，表示导出AVUser.attributes
     ...AVUser.attributes
   }
 }
