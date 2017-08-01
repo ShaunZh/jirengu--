@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 14:23:57
+* @Last Modified time: 2017-08-01 14:37:25
 */
 import AV from 'leancloud-storage';
 
@@ -26,8 +26,6 @@ export function signUp(username, password, successFn, errorFn) {
   user.setPassword(password);
 
   user.signUp().then(function (loginedUser) {
-    console.log('打印出loginedUser: ');
-    console.log(loginedUser);
     let user = getUserFromAVUser(loginedUser);
     successFn.call(null, user);
   }, function(error) {
