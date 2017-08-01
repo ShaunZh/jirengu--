@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-08-01 21:16:46
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 21:34:01
+* @Last Modified time: 2017-08-01 23:36:54
 */
 
 import React, {Component} from 'react';
@@ -14,7 +14,7 @@ export default class SignUpForm extends Component {
         <div className="row">
           <label>邮箱</label>
           <input type="text" value={this.props.formData.email}
-            onChange={this.props.onChange.bind(null, 'eamil')} />
+            onChange={this.props.onChange.bind(null, 'email')} />
         </div>
         <div className="row">
           <label>用户名</label>
