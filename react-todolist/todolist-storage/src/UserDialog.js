@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 14:32:46
+* @Last Modified time: 2017-08-01 14:43:05
 */
 
 import React, { Component } from 'react';
@@ -88,8 +88,18 @@ export default class UserDialog extends Component {
             <div className="UserDialog-Wrapper">
           <div className="UserDialog">
             <nav onChange = {this.switch.bind(this)}>
-              <label><input type="radio" value="signUp" checked={this.state.selected === 'signUp'} /> 注册</label>
-              <label><input type="radio" value="signIn" checked={this.state.selected === 'signIn'} /> 登录</label>
+              <label>
+                <input type="radio" value="signUp"
+                  checked={this.state.selected === 'signUp'}
+                  onChange={this.switch.bind(this)}
+                /> 注册
+              </label>
+              <label>
+                <input type="radio" value="signIn"
+                  checked={this.state.selected === 'signIn'}
+                  onChange={this.switch.bind(this)}
+                /> 登录
+              </label>
             </nav>
 
             <div className="panes">
