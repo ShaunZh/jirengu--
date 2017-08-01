@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 18:11:38
+* @Last Modified time: 2017-08-01 18:16:49
 */
 
 import React, { Component } from 'react';
@@ -15,6 +15,7 @@ export default class UserDialog extends Component {
         this.state = {
             selected: 'signUp',
             formData: {
+                email: '',
                 username: '',
                 password: ''
             }
@@ -29,7 +30,7 @@ export default class UserDialog extends Component {
 
     signUp(e) {
         e.preventDefault();
-        let {username, password} = this.state.formData;
+        let {email, username, password} = this.state.formData;
         let success = (user) => {
             this.props.onSignUp.call(null, user);
         }
@@ -49,7 +50,7 @@ export default class UserDialog extends Component {
     }
     signIn(e) {
         e.preventDefault();
-        let {username, password} = this.state.formData;
+        let {email, username, password} = this.state.formData;
         let success = (user) => {
             this.props.onSignIn.call(null, user);
         }
@@ -85,6 +86,10 @@ export default class UserDialog extends Component {
           <div className="row">
             <label>用户名</label>
             <input type="text" value={this.state.formData.username} onChange={this.changeFormData.bind(this, 'username')} />
+          </div>
+          <div className="row">
+            <label>邮箱</label>
+            <input type="text" value={this.state.formData.email} onChange={this.changeFormData.bind(this, 'email')} />
           </div>
           <div className="row">
             <label>密码</label>
