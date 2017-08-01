@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 15:11:30
+* @Last Modified time: 2017-08-01 15:18:47
 */
 import AV from 'leancloud-storage';
 
@@ -33,6 +33,15 @@ export function signUp(username, password, successFn, errorFn) {
   });
 
   return undefined;
+}
+
+export function signIn(username, password, successFn, errorFn) {
+  AV.User.logIn(username, password).then(function (loginedUser) {
+    let user = getUserFromAVUser(loginedUser);
+    successFn.call(null, user);
+  }, function (error) {
+    errorFn.call(null, error);
+  })
 }
 
 export function getCurrentUser() {

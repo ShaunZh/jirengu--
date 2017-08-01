@@ -2,12 +2,12 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 14:43:05
+* @Last Modified time: 2017-08-01 15:22:20
 */
 
 import React, { Component } from 'react';
 import './UserDialog.css';
-import {signUp} from './leanCloud';
+import {signUp, signIn} from './leanCloud';
 
 export default class UserDialog extends Component {
   constructor(props) {
@@ -34,11 +34,21 @@ export default class UserDialog extends Component {
         this.props.onSignUp.call(null, user);
       }
       let error = (error) => {
-        console.log(error);
+        alert(error);
       }
       signUp(username, password, success, error);
     }
-    signIn(e) {}
+    signIn(e) {
+      e.preventDefault();
+      let {username, password} = this.state.formData;
+      let success = (user) => {
+        this.props.onSignIn.call(null, user);
+      }
+      let error = (error) => {
+        alert(error);
+      }
+      signIn(username, password, success, error);
+    }
 
     changeFormData(key, e) {
       // this.state.formData.username = e.target.value;
