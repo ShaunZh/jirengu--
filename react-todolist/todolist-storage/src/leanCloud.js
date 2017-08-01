@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 15:04:58
+* @Last Modified time: 2017-08-01 15:11:30
 */
 import AV from 'leancloud-storage';
 
@@ -42,6 +42,11 @@ export function getCurrentUser() {
   } else {
     return null;
   }
+}
+
+export function signOut() {
+  AV.User.logOut();
+  return undefined;
 }
 
 function getUserFromAVUser(AVUser) {
