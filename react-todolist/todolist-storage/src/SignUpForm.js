@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-08-01 21:16:46
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-01 23:36:54
+* @Last Modified time: 2017-08-02 09:38:15
 */
 
 import React, {Component} from 'react';
@@ -12,18 +12,20 @@ export default class SignUpForm extends Component {
     return (
       <form className="signUp" onSubmit={this.props.onSubmit.bind(this)}>{/* 注册 */}
         <div className="row">
-          <label>邮箱</label>
-          <input type="text" value={this.props.formData.email}
-            onChange={this.props.onChange.bind(null, 'email')} />
-        </div>
-        <div className="row">
           <label>用户名</label>
           <input type="text" value={this.props.formData.username}
             onChange={this.props.onChange.bind(null, 'username')} />
         </div>
+
+        <div className="row">
+          <label>邮箱</label>
+          <input type="text" value={this.props.formData.email}
+            onChange={this.props.onChange.bind(null, 'email')} />
+        </div>
+
         <div className="row">
           <label>密码</label>
-          <input type="text" value={this.props.formData.password}
+          <input type="password" value={this.props.formData.password}
             onChange={this.props.onChange.bind(null, 'password')} />
         </div>
         <div className="row actions">

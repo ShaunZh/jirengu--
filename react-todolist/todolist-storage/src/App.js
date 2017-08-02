@@ -88,7 +88,6 @@ class App extends Component {
    }
 
   changeTitle(event) {
-    console.log('hhh');
     this.setState({
       newTodo: event.target.value,
       todoList: this.state.todoList
@@ -96,7 +95,6 @@ class App extends Component {
   }
 
   addTodo(event) {
-    console.log('aaa');
     this.state.todoList.push({
       id: idMaker(),
       title: event.target.value,

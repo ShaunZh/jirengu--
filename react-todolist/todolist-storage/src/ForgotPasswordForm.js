@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-08-01 23:40:22
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 00:06:31
+* @Last Modified time: 2017-08-02 09:45:20
 */
 
 import React, {Component} from 'react';
@@ -10,7 +10,7 @@ import React, {Component} from 'react';
 export default class ForgotPasswordForm extends Component {
   render () {
     return (
-      <div classNmae="forgotPassword">
+      <div className="forgotPassword">
         <h3>
           重置密码
         </h3>
