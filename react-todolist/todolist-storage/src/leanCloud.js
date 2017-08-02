@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 14:00:09
+* @Last Modified time: 2017-08-02 14:15:40
 */
 import AV from 'leancloud-storage';
 
@@ -52,8 +52,14 @@ export const TodoModel = {
     });
   },
 
-  update() {
-
+  update(id, title, status, deleted, successFn, errorFn) {
+    let todo = AV.Object.createWithoutData('Todo', id);
+    title !== undefined && todo.set('title', title);
+    status !== undefined && todo.set('status', status);
+    deleted !== undefined && todo.set('deleted', deleted);
+    todo.save().then((response) => {
+      successFn && successFn.call(null);
+    }, (error) => errorFn && errorFn.call(null, error))
   },
 
   destroy(todoId, successFn, errorFn) {
