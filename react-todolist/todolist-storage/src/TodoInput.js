@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 10:09:16
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 11:11:07
+* @Last Modified time: 2017-08-02 11:40:34
 */
 
 import React from 'react';
@@ -25,7 +25,7 @@ export default function(props) {
     // onChange 和 onKeyPress 是添加事件
     return <input type="text" value = {props.content}
     className="TodoInput"
-    onChange = {changeTitle.bind(this)}
-    onKeyPress = {submit.bind(this)}/>
+    onChange = {changeTitle.bind(null, props)}
+    onKeyPress = {submit.bind(null, props)}/>
 
 }
