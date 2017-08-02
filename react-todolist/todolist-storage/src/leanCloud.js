@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 13:14:01
+* @Last Modified time: 2017-08-02 14:00:09
 */
 import AV from 'leancloud-storage';
 
@@ -56,8 +56,13 @@ export const TodoModel = {
 
   },
 
-  destroy() {
-
+  destroy(todoId, successFn, errorFn) {
+    let todo = AV.Object.createWithoutData('Todo', todoId);
+    todo.destroy().then(function(response) {
+      successFn && successFn.call(null);
+    }, function(error) {
+      errorFn && errorFn.call(null, error);
+    })
   }
 }
 export function signUp(email, username, password, successFn, errorFn) {
