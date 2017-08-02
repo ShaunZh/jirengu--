@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 12:19:42
+* @Last Modified time: 2017-08-02 13:14:01
 */
 import AV from 'leancloud-storage';
 
@@ -20,14 +20,10 @@ export default AV
 export const TodoModel = {
   getByUser(user, successFn, errorFn) {
     let query = new AV.Query('Todo');
-    query.find.then((response) => {
-      console.log('response = ');
-      console.log(response);
+    query.find().then((response) => {
       let array = response.map((t) => {
         return {id: t.id, ...t.attributes}
       });
-      console.log('array');
-      console.log(array);
       successFn.call(null, array);
     }, (error) => {
       errorFn && errorFn.call(null, error);
@@ -40,6 +36,13 @@ export const TodoModel = {
     todo.set('title', title);
     todo.set('status', status);
     todo.set('deleted', deleted);
+
+    let acl = new AV.ACL();
+    acl.setPublicReadAccess(false);
+    acl.setWriteAccess(AV.User.current(), true);
+
+    todo.setACL(acl);
+
     todo.save().then(function (response) {
       console.log('ok');
       successFn.call(null, response.id);
@@ -86,9 +89,10 @@ export function signIn(username, password, successFn, errorFn) {
 }
 
 export function getCurrentUser() {
-  console.log('user');
+
+  let user = AV.User.current();
+    console.log('user');
   console.log(user);
-  let user = AV.user.current();
   if (user) {
     return getUserFromAVUser(user);
   } else {

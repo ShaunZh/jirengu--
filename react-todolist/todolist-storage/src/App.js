@@ -25,7 +25,7 @@ class App extends Component {
       TodoModel.getByUser(user, (todos) => {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.todoList = todos;
-        this.setState(stateCopy);
+        this.setState(stateCopy)
       })
     }
   }
