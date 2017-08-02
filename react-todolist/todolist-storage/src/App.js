@@ -8,18 +8,19 @@ import React, { Component } from 'react';
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 import UserDialog from './UserDialog'
-import AV from './leanCloud'
 import {getCurrentUser, signOut} from './leanCloud';
 
-// var TodoFolder = AV.Object.extend('TodoFolder');
-// var todoFolder = new TodoFolder();
-// todoFolder.set('name', '工作');
-// todoFolder.set('priority', 1);
-// todoFolder.save().then((todo) => {
-//   console.log('objectId is ' + todo.id);
-// }, (error) => {
-//   console.error(error);
-// });
+
+
+var TodoFolder = AV.Object.extend('TodoFolder');
+var todoFolder = new TodoFolder();
+todoFolder.set('name', '工作');
+todoFolder.set('priority', 1);
+todoFolder.save().then((todo) => {
+  console.log('objectId is ' + todo.id);
+}, (error) => {
+  console.error(error);
+});
 
 class App extends Component {
   constructor(props) {
