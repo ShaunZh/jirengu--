@@ -2,7 +2,7 @@
 * @Author: Marte
 * @Date:   2017-07-31 21:54:47
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 09:49:53
+* @Last Modified time: 2017-08-02 22:02:24
 */
 
 import React, { Component } from 'react';
@@ -10,6 +10,8 @@ import './UserDialog.css';
 import { signUp, signIn, sendPasswordResetEmail} from './leanCloud';
 import SignInOrSignUp from './SignInOrSignUp'
 import ForgotPasswordForm from './ForgotPasswordForm';
+import VerifyData from './VerifyData';
+
 
 export default class UserDialog extends Component {
     constructor(props) {
@@ -26,7 +28,12 @@ export default class UserDialog extends Component {
 
     signUp(e) {
         e.preventDefault();
+
         let {email, username, password} = this.state.formData;
+        if (!(VerifyData.username(username) && VerifyData.email(email) && VerifyData.password(password))) {
+          alert('输入有误');
+          return;
+        }
         let success = (user) => {
             this.props.onSignUp.call(null, user);
         }
@@ -49,7 +56,12 @@ export default class UserDialog extends Component {
     }
     signIn(e) {
         e.preventDefault();
+
         let {email, username, password} = this.state.formData;
+        if (!(VerifyData.username(username) && VerifyData.password(password))) {
+          alert('输入有误');
+          return;
+        }
         let success = (user) => {
             this.props.onSignIn.call(null, user);
         }

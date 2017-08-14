@@ -2,8 +2,9 @@
 * @Author: Marte
 * @Date:   2017-07-31 17:33:07
 * @Last Modified by:   Marte
-* @Last Modified time: 2017-08-02 14:15:40
+* @Last Modified time: 2017-08-09 09:00:04
 */
+
 import AV from 'leancloud-storage';
 
 var APP_ID = 'z4xch4Exr8u8GEfhGO2lndxC-gzGzoHsz';
@@ -20,10 +21,14 @@ export default AV
 export const TodoModel = {
   getByUser(user, successFn, errorFn) {
     let query = new AV.Query('Todo');
+   //query.equalTo('deleted', false);
     query.find().then((response) => {
+      console.log('response');
+      console.log(response);
       let array = response.map((t) => {
         return {id: t.id, ...t.attributes}
       });
+      console.log(array);
       successFn.call(null, array);
     }, (error) => {
       errorFn && errorFn.call(null, error);
@@ -40,7 +45,7 @@ export const TodoModel = {
     let acl = new AV.ACL();
     acl.setPublicReadAccess(false);
     acl.setWriteAccess(AV.User.current(), true);
-
+    acl.setReadAccess(AV.User.current(), true);
     todo.setACL(acl);
 
     todo.save().then(function (response) {
@@ -52,8 +57,15 @@ export const TodoModel = {
     });
   },
 
-  update(id, title, status, deleted, successFn, errorFn) {
+  update({id, title, status, deleted}, successFn, errorFn) {
+
+    console.log('进来了');
+    console.log(id);
+    console.log(title);
+    console.log(status);
+    console.log(deleted);
     let todo = AV.Object.createWithoutData('Todo', id);
+    console.log(id);
     title !== undefined && todo.set('title', title);
     status !== undefined && todo.set('status', status);
     deleted !== undefined && todo.set('deleted', deleted);
@@ -63,12 +75,13 @@ export const TodoModel = {
   },
 
   destroy(todoId, successFn, errorFn) {
-    let todo = AV.Object.createWithoutData('Todo', todoId);
-    todo.destroy().then(function(response) {
-      successFn && successFn.call(null);
-    }, function(error) {
-      errorFn && errorFn.call(null, error);
-    })
+    // let todo = AV.Object.createWithoutData('Todo', todoId);
+    // todo.destroy().then(function(response) {
+    //   successFn && successFn.call(null);
+    // }, function(error) {
+    //   errorFn && errorFn.call(null, error);
+    // })
+    TodoModel.update({id: todoId, deleted: true}, successFn, errorFn);
   }
 }
 export function signUp(email, username, password, successFn, errorFn) {
@@ -100,10 +113,7 @@ export function signIn(username, password, successFn, errorFn) {
 }
 
 export function getCurrentUser() {
-
   let user = AV.User.current();
-    console.log('user');
-  console.log(user);
   if (user) {
     return getUserFromAVUser(user);
   } else {

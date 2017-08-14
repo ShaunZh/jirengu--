@@ -10,8 +10,6 @@ import TodoItem from './TodoItem';
 import UserDialog from './UserDialog'
 import {getCurrentUser, signOut, TodoModel} from './leanCloud';
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,14 +18,18 @@ class App extends Component {
       newTodo: '',
       todoList: []
     };
-    let user = getCurrentUser();
-    if (user) {
-      TodoModel.getByUser(user, (todos) => {
-        let stateCopy = JSON.parse(JSON.stringify(this.state))
-        stateCopy.todoList = todos;
-        this.setState(stateCopy)
-      })
-    }
+
+    //let user = getCurrentUser();
+    //console.log(user);
+    // if (user) {
+    //   TodoModel.getByUser(user, (todos) => {
+
+    //     let stateCopy = JSON.parse(JSON.stringify(this.state))
+    //     stateCopy.todoList = todos;
+    //     console.log(todos);
+    //     this.setState(stateCopy)
+    //   })
+    // }
   }
 
   render() {
@@ -69,13 +71,25 @@ class App extends Component {
     signOut();
     let stateCopy = JSON.parse(JSON.stringify(this.state));
     stateCopy.user = {};
+    stateCopy.todoList = [];    // 退出登录后，要将显示的数据清除
     this.setState(stateCopy);
   }
 
+  reloadTodoList(user) {
+    if (user) {
+      TodoModel.getByUser(user, (todos) => {
+        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        stateCopy.todoList = todos;
+        this.setState(stateCopy)
+      });
+    }
+  }
   onSignUpOrSignIn(user) {
     let stateCopy = JSON.parse(JSON.stringify(this.state));
     stateCopy.user = user;
     this.setState(stateCopy);
+    // 登录或注册完成后，加载用户数据
+    this.reloadTodoList(user);
   }
   componentDidUpdate() {
 
@@ -84,6 +98,8 @@ class App extends Component {
   toggle(e, todo) {
     let oldStatus = todo.status
     todo.status = todo.status === 'completed' ? '' : 'completed';
+    console.log('todo.status');
+    console.log(todo.status);
     TodoModel.update(todo, () => {
       this.setState(this.state);
     }, (error) => {
@@ -103,7 +119,7 @@ class App extends Component {
   addTodo(event) {
     let newTodo = {
       title: event.target.value,
-      status: null,
+      status: '',
       deleted: false
     };
 
@@ -120,6 +136,7 @@ class App extends Component {
    }
 
   delete(event, todo) {
+    console.log(todo);
     TodoModel.destroy(todo.id, () => {
       todo.deleted = true;
       this.setState(this.state);
